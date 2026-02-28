@@ -96,3 +96,9 @@ function loginUser(collegeID, password) {
     alert("Login successful!");
 }
 
+//logout function
+function logoutUser() {
+    currentUser = null;
+    localStorage.removeItem("currentUser");
+    alert("Logged out successfully!");
+}
