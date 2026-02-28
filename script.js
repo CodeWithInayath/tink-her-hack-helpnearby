@@ -78,3 +78,21 @@ function registerUser(name, collegeID, contact, password) {
     alert("Registration successful!");
 }
 
+//user login
+function loginUser(collegeID, password) {
+
+    const user = users.find(user => 
+        user.collegeID === collegeID && user.password === password
+    );
+
+    if (!user) {
+        alert("Invalid credentials!");
+        return;
+    }
+
+    currentUser = user;
+    localStorage.setItem("currentUser", JSON.stringify(user));
+
+    alert("Login successful!");
+}
+
