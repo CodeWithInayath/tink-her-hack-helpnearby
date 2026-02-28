@@ -18,3 +18,10 @@ function saveRequests() {
 function saveUsers() {
     localStorage.setItem("users", JSON.stringify(users));
 }
+
+//function to validate college ID
+function validateCollegeID(id) {
+    const pattern = /^CET\d{5}$/;
+    return pattern.test(id);
+}
+
