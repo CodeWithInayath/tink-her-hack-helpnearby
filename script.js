@@ -47,3 +47,34 @@ function addRequest(title, description, category, urgency, contact) {
     requests.push(newRequest);
     saveRequests();
 }
+
+//user registration
+function registerUser(name, collegeID, contact, password) {
+
+    if (!validateCollegeID(collegeID)) {
+        alert("Invalid College ID format!");
+        return;
+    }
+
+    // Check if user already exists
+    const existingUser = users.find(user => user.collegeID === collegeID);
+
+    if (existingUser) {
+        alert("User already registered!");
+        return;
+    }
+
+    const newUser = {
+        name,
+        collegeID,
+        contact,
+        password,
+        points: 0
+    };
+
+    users.push(newUser);
+    saveUsers();
+
+    alert("Registration successful!");
+}
+
