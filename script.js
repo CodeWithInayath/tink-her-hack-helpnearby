@@ -25,3 +25,25 @@ function validateCollegeID(id) {
     return pattern.test(id);
 }
 
+//Add Request
+function addRequest(title, description, category, urgency, contact) {
+
+    if (!currentUser) {
+        alert("Please login to post a request.");
+        return;
+    }
+
+    const newRequest = {
+        id: Date.now(),
+        title,
+        description,
+        category,
+        urgency,
+        contact,
+        postedBy: currentUser.collegeID,
+        status: "Active"
+    };
+
+    requests.push(newRequest);
+    saveRequests();
+}
