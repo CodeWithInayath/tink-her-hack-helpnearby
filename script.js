@@ -102,3 +102,57 @@ function logoutUser() {
     localStorage.removeItem("currentUser");
     alert("Logged out successfully!");
 }
+
+//display function
+function displayRequests(filteredRequests = requests) {
+
+    const container = document.getElementById("requestContainer");
+
+    container.innerHTML = ""; // Clear old content
+
+    if (filteredRequests.length === 0) {
+        container.innerHTML = "<p>No requests available.</p>";
+        return;
+    }
+
+    filteredRequests.forEach(request => {
+
+        const card = document.createElement("div");
+        card.classList.add("request-card");
+
+        card.innerHTML = `
+            <h3>${request.title}</h3>
+            <p>${request.description}</p>
+            <p><strong>Category:</strong> ${request.category}</p>
+            <p><strong>Urgency:</strong> ${request.urgency}</p>
+            <p><strong>Contact:</strong> ${request.contact}</p>
+            <p><strong>Status:</strong> ${request.status}</p>
+            ${request.status === "Active" ? 
+                `<button onclick="markResolved(${request.id})">Mark as Resolved</button>` 
+                : ""
+            }
+        `;
+
+        container.appendChild(card);
+    });
+}
+
+//Auto Load on page load
+window.onload = function () {
+    displayRequests();
+};
+
+//Update add request
+displayRequests();
+
+//Mark request as resolved
+function markResolved(id) {
+
+    const request = requests.find(req => req.id === id);
+
+    if (request) {
+        request.status = "Resolved";
+        saveRequests();
+        displayRequests();
+    }
+}
